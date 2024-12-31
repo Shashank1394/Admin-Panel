@@ -7,24 +7,40 @@ import styles from "./admin/admin.module.css";
 export default function AdminPanel() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [isMounted, setIsMounted] = useState(false); // Track mounting status
   const LOADING_TIMEOUT = 2000; // Total loading duration in ms
   const UPDATE_INTERVAL = 100; // Interval to update progress in ms
 
   useEffect(() => {
-    const increment = 100 / (LOADING_TIMEOUT / UPDATE_INTERVAL);
-    const interval = setInterval(() => {
-      setProgress((prev) => Math.min(prev + increment, 100));
-    }, UPDATE_INTERVAL);
+    setIsMounted(true); // Set mounted to true after the component has mounted
 
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, LOADING_TIMEOUT);
+    let startTime;
+    const increment = 100 / (LOADING_TIMEOUT / UPDATE_INTERVAL);
+
+    const animateProgress = () => {
+      const elapsedTime = Date.now() - startTime;
+      const newProgress = Math.min((elapsedTime / LOADING_TIMEOUT) * 100, 100);
+      setProgress(newProgress);
+
+      if (newProgress < 100) {
+        requestAnimationFrame(animateProgress);
+      } else {
+        setLoading(false);
+      }
+    };
+
+    startTime = Date.now();
+    requestAnimationFrame(animateProgress);
 
     return () => {
-      clearTimeout(timer);
-      clearInterval(interval);
+      // Cleanup any side effects
     };
   }, []);
+
+  // Don't render the loading part until the component is mounted
+  if (!isMounted) {
+    return null; // Render nothing initially to prevent hydration issues
+  }
 
   if (loading) {
     return (
