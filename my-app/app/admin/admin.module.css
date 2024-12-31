@@ -1,0 +1,91 @@
+/* admin.module.css */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.progressBar {
+  width: 80%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #007bff;
+  transition: width 0.1s ease-in-out;
+}
+
+.loadingContainer p {
+  font-size: 16px;
+  color: #333;
+  margin-top: 10px;
+}
+
+.spinner {
+  display: none; /* Removed spinner as it's replaced by the progress bar */
+}
+
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #007bff;
+  padding: 10px 20px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navTitle {
+  font-size: 24px;
+  margin: 0;
+}
+
+.navList {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem button {
+  background-color: white;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navItem button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.mainContent {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin: 20px;
+  text-align: center;
+}
+
+.mainContent h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.mainContent p {
+  color: #666;
+  font-size: 18px;
+}
